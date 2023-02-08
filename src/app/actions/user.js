@@ -7,7 +7,7 @@ import {
   getToken,
   setToken,
 } from 'token';
-import config from 'config';
+import config from '../../config/configExample';
 
 import {
   ERROR_RECEIVE_USER,
@@ -219,9 +219,9 @@ const signOut = () => {
 
   return postJson({
     url: `${BASE_URL}${USERS_SERVICE}/user/signOut`,
-  }).catch(() => {
+  })/*.catch(() => {
     // TODO: this catch() is just a stub, which should be removed
-  });
+  });*/
 };
 
 export const fetchSignOut = () => (dispatch) => {

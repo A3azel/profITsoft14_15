@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Link from 'components/Link';
 import Typography from 'components/Typography';
 import useAccessValidate from 'hooks/useAccessValidate';
+import {Container} from "@material-ui/core";
 
 const getClasses = makeStyles(() => ({
   container: {
@@ -25,7 +26,20 @@ const Initial = ({
   });
 
   return (
-    <div className={classes.container}>
+      <Container>
+        <Typography sx={{
+          textAlign:"center",
+          fontSize: 36,
+          marginBottom: 2,
+          fontFamily: 'Bold',
+        }}>
+          Car information
+        </Typography>
+        <Link href={"/allCars"}>
+          All cars
+        </Link>
+      </Container>
+    /*<div className={classes.container}>
       {canSeeList && availableItems.map((item, index) => (
         <Link
           href={index % 2 === 0
@@ -49,8 +63,10 @@ const Initial = ({
           Не могу ничего показать :(
         </Typography>
       )}
-    </div>
+    </div>*/
   )
 };
+
+
 
 export default Initial;
