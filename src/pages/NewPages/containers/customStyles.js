@@ -122,6 +122,7 @@ export const customStyles = {
         }
     },
 
+
     tablePaper: {
         position: "relative",
         margin: '5% 5% 5% 5%',
