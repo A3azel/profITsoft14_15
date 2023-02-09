@@ -1,1 +1,1 @@
-export { default } from '@material-ui/core/Button';
+export { default } from '@mui/material/Button';

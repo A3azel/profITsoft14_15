@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Button,
-    Pagination,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
     tableCellClasses,
-    TableContainer,
-    TableHead,
-    TableRow
 } from "@mui/material";
 import {styled} from "@mui/material/styles";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteCar, fetchCarPage, fetchCarPageCount} from "../../../app/actions/car";
 import {useHistory} from "react-router-dom";
-import {customStyles} from "./customStyles";
+import Button from "components/Button";
+import Pagination from "components/Pagination";
+import Paper from "components/Paper";
+import Table from "components/Table";
+import TableBody from "components/TableBody";
+import TableCell from "components/TableCell";
+import TableContainer from "components/TableContainer";
+import TableHead from "components/TableHead";
+import TableRow from "components/TableRow";
+import {customStyles} from "../../customStyles";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -37,7 +37,24 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
     background: 'white',
 }));
 
+/*const useStyles = makeStyles(theme => ({
+    tablePaper: {
+        position: "relative",
+        margin: '5% 5% 5% 5%',
+        padding: '50px',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        boxShadow: ".2px 12px 18px rgba(131,153,167,0.6)",
+        "&:hover": {
+            boxShadow: "0px 24px 36px rgba(131,153,167,0.99)"
+        }
+    },
+}));*/
+
 function AllCars(props) {
+    //const classes = useStyles();
+
     const [state, setState] = useState({});
 
     const cars = useSelector(state => {
@@ -79,7 +96,7 @@ function AllCars(props) {
     return (
         <Paper sx={customStyles.tablePaper}>
             <Button onClick={() => history.push("/createUpdate")} variant="contained"
-                    sx={{backgroundColor: "green", marginBottom: "20px"}}>Add</Button>
+                    style={{backgroundColor: "green", marginBottom: "20px"}}>Add</Button>
             <TableContainer sx={{maxHeight: 500}}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>

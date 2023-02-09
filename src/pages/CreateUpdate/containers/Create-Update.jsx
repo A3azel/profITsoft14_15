@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, InputLabel, Paper, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useParams} from "react-router-dom";
-import {fetchCar, updateCar, addCar} from "../../../app/actions/car";
-import CustomTitle from "../../../components/CustomTitle/CustomTitle";
-import ErrorLabel from "../../../components/CustomErrorLable/ErrorLabel";
-import {customStyles} from "./customStyles";
-import SubmitButton from "components/SubmitButton";
-import BeckButton from "../../../components/BeckButton";
-import Button from "../../../components/Button";
+import {fetchCar, updateCar, addCar} from "app/actions/car";
+import CustomTitle from "components/CustomTitle";
+import ErrorLabel from "components/CustomErrorLable";
+import Paper from "components/Paper";
+import Button from "components/Button";
+import Grid from "components/Grid";
+import InputLabel from "components/InputLabel";
+import TextField from "components/TextField";
+import {customStyles} from "../../customStyles";
 
 
 function CreateUpdateCar(props) {
