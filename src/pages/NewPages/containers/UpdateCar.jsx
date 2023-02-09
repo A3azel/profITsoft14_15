@@ -3,8 +3,8 @@ import {Button, Grid, InputLabel, Paper, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useParams} from "react-router-dom";
 import {fetchCar, updateCar} from "../../../app/actions/car";
-import CustomTitle from "../../../components/customTitle/customTitle";
-import ErrorLabel from "../../../components/customErrorLable/errorLabel";
+import CustomTitle from "../../../components/CustomTitle/CustomTitle";
+import ErrorLabel from "../../../components/CustomErrorLable/ErrorLabel";
 import {customStyles} from "./customStyles";
 
 

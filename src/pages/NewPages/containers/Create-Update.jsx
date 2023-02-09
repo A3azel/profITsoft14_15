@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Grid, InputLabel, Paper, TextField} from "@mui/material";
+import {Grid, InputLabel, Paper, TextField} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useParams} from "react-router-dom";
 import {fetchCar, updateCar, addCar} from "../../../app/actions/car";
-import CustomTitle from "../../../components/customTitle/customTitle";
-import ErrorLabel from "../../../components/customErrorLable/errorLabel";
+import CustomTitle from "../../../components/CustomTitle/CustomTitle";
+import ErrorLabel from "../../../components/CustomErrorLable/ErrorLabel";
 import {customStyles} from "./customStyles";
+import SubmitButton from "components/SubmitButton";
+import BeckButton from "../../../components/BeckButton";
+import Button from "../../../components/Button";
 
 
 function CreateUpdateCar(props) {
@@ -209,15 +212,17 @@ function CreateUpdateCar(props) {
                         </Grid>
                     </Grid>
                 </form>
-                <Button
+                <SubmitButton
                     onClick={handleSubmit}
-                    type={"submit"}
-                    variant="contained"
-                    sx={customStyles.buttonStyles}
+                    buttonText={id ? 'Оновити' : 'Додати'}
                 >
-                    {id ? 'Оновити' : 'Додати'}
-                </Button>
+                </SubmitButton>
                 <br/>
+                {/*<BeckButton
+                    onClick={() => history.push("/allCars")}
+                    buttonText={'Назад'}
+                >
+                </BeckButton>*/}
                 <Button
                     onClick={() => history.push("/allCars")}
                     type={"submit"}

@@ -3,8 +3,8 @@ import {Button, Grid, InputLabel, Paper, TextField} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {addCar} from "../../../app/actions/car";
 import {useHistory} from "react-router-dom";
-import CustomTitle from "../../../components/customTitle/customTitle";
-import ErrorLabel from "../../../components/customErrorLable/errorLabel";
+import CustomTitle from "../../../components/CustomTitle/CustomTitle";
+import ErrorLabel from "../../../components/CustomErrorLable/ErrorLabel";
 import {customStyles} from "./customStyles";
 
 function CreateCar(props) {
