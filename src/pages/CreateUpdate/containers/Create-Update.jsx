@@ -56,7 +56,7 @@ function CreateUpdateCar(props) {
         setState({...state, [name]: value})
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         state.carPrise = Number(state.carPrise).toFixed(2);
         state.releaseDate = new Date(state.releaseDate);
@@ -69,11 +69,32 @@ function CreateUpdateCar(props) {
             history.push("/allCars");
             return;
         }
-        if(Object.keys(errors).length === 0 && id===undefined){
+        if (Object.keys(errors).length === 0 && id === undefined) {
             dispatch(addCar(state));
             history.push("/allCars");
         }
+
+        /*if (Object.keys(errors).length === 0 && id !== undefined) {
+            try {
+                await dispatch(updateCar(state, Number(id))).unwrap();
+                history.push("/allCars");
+                return;
+            } catch (error) {
+                errors.driverId = error;
+                setErrors(errors);
+            }
+        }
+        if (Object.keys(errors).length === 0 && id === undefined) {
+            try {
+                await dispatch(addCar(state)).unwrap();
+                history.push("/allCars");
+            } catch (error) {
+                errors.driverId = error;
+                setErrors(errors);
+            }
+        }*/
     }
+    //console.log(errors)
 
     const validate = (values) => {
         const errors = {};
@@ -97,8 +118,8 @@ function CreateUpdateCar(props) {
                 errors.releaseDate = "Not valid date";
             }
         }
-        if(!values.driverId){
-            errors.driverId = "This field can't be blank";
+        if(!values.driverId || values.driverId<=0){
+            errors.driverId = "This field can't be blank or negative or zero";
         }
         return errors;
     }
@@ -208,7 +229,7 @@ function CreateUpdateCar(props) {
                                 InputLabelProps={{shrink: false}}
                                 onChange={handleChange}
                             />
-                            <ErrorLabel errorMassage={errors.driverID}/>
+                            <ErrorLabel errorMassage={errors.driverId}/>
                             <br/>
                         </Grid>
                     </Grid>

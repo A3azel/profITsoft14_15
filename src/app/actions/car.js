@@ -67,8 +67,6 @@ const getCar = (id) => {
 
 
 const addCar = (carBody) => {
-    /*console.console.log('carBody: '+ carBody);
-    console.log('JSON: '+ JSON.stringify(carBody));*/
     return (dispatch) => {
         dispatch(addCarRequest())
         fetch(basicUrl + "/create", {
@@ -79,6 +77,12 @@ const addCar = (carBody) => {
             },
             body: JSON.stringify(carBody),
         })
+            .then((response) => {
+                if (response.status!=201) {
+                    console.log("Here")
+                    throw new Error(response.json());
+                }
+            })
             .then((response) => {
                 dispatch(addCarSuccess(response.json()));
                 dispatch(fetchCarPage({page: 1}));
@@ -100,6 +104,11 @@ const updateCar = (carBody, id) => {
             },
             body: JSON.stringify(carBody),
         })
+            .then((response) => {
+                if (response.status!=201) {
+                    throw new Error(response.json());
+                }
+            })
             .then((response) => {
                 dispatch(updateCarSuccess(response.json()));
                 dispatch(fetchCarPage({page: 1}));

@@ -26,19 +26,29 @@ const Initial = ({
   });
 
   return (
-      <Container>
-        <Typography sx={{
-          textAlign:"center",
-          fontSize: 36,
-          marginBottom: 2,
-          fontFamily: 'Bold',
-        }}>
-          Car information
-        </Typography>
-        <Link href={"/allCars"}>
-          All cars
-        </Link>
-      </Container>
+      <div className={classes.container}>
+          {canSeeList ?
+              <Container>
+              <Typography sx={{
+                  textAlign:"center",
+                  fontSize: 36,
+                  marginBottom: 2,
+                  fontFamily: 'Bold',
+              }}>
+                  Car information
+              </Typography>
+              <Link href={"/allCars"}>
+                  All cars
+              </Link>
+          </Container> : null
+          }
+        {!canSeeList && (
+            <Typography>
+              Не могу ничего показать :(
+            </Typography>
+        )}
+      </div>
+
     /*<div className={classes.container}>
       {canSeeList && availableItems.map((item, index) => (
         <Link
