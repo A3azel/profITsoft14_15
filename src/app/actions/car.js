@@ -78,18 +78,11 @@ const addCar = (carBody) => {
             body: JSON.stringify(carBody),
         })
             .then((response) => {
-                if (response.status!=201) {
-                    throw new Error(response.json());
-                }
-            })
-            .then((response) => {
                 dispatch(addCarSuccess(response.json()));
                 dispatch(fetchCarPage({page: 1}));
             })
             .catch((error) => {
                 dispatch(errorAddCar(error));
-                console.log("Error")
-                throw new Error(error.message);
             })
     }
 };
@@ -105,11 +98,6 @@ const updateCar = (carBody, id) => {
             },
             body: JSON.stringify(carBody),
         })
-            .then((response) => {
-                if (response.status!=201) {
-                    throw new Error(response.json());
-                }
-            })
             .then((response) => {
                 dispatch(updateCarSuccess(response.json()));
                 dispatch(fetchCarPage({page: 1}));
