@@ -36,10 +36,6 @@ function CreateUpdateCar(props) {
         return state.car.searchCar;
     });
 
-    const searchErrors = useSelector(state => {
-        return state.car.errors;
-    });
-
     useEffect(() => {
         if (searchCar && id) {
             setState({
