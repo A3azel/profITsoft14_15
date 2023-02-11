@@ -37,24 +37,7 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
     background: 'white',
 }));
 
-/*const useStyles = makeStyles(theme => ({
-    tablePaper: {
-        position: "relative",
-        margin: '5% 5% 5% 5%',
-        padding: '50px',
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        boxShadow: ".2px 12px 18px rgba(131,153,167,0.6)",
-        "&:hover": {
-            boxShadow: "0px 24px 36px rgba(131,153,167,0.99)"
-        }
-    },
-}));*/
-
 function AllCars(props) {
-    //const classes = useStyles();
-
     const [state, setState] = useState({});
 
     const cars = useSelector(state => {

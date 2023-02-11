@@ -36,6 +36,10 @@ function CreateUpdateCar(props) {
         return state.car.searchCar;
     });
 
+    const searchErrors = useSelector(state => {
+        return state.car.errors;
+    });
+
     useEffect(() => {
         if (searchCar && id) {
             setState({
@@ -56,7 +60,7 @@ function CreateUpdateCar(props) {
         setState({...state, [name]: value})
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         state.carPrise = Number(state.carPrise).toFixed(2);
         state.releaseDate = new Date(state.releaseDate);
@@ -64,7 +68,7 @@ function CreateUpdateCar(props) {
         let errors = validate(state);
         setErrors(errors);
 
-        if(Object.keys(errors).length === 0 && id!==undefined){
+        if (Object.keys(errors).length === 0 && id !== undefined) {
             dispatch(updateCar(state, Number(id)));
             history.push("/allCars");
             return;
@@ -73,28 +77,7 @@ function CreateUpdateCar(props) {
             dispatch(addCar(state));
             history.push("/allCars");
         }
-
-        /*if (Object.keys(errors).length === 0 && id !== undefined) {
-            try {
-                await dispatch(updateCar(state, Number(id))).unwrap();
-                history.push("/allCars");
-                return;
-            } catch (error) {
-                errors.driverId = error;
-                setErrors(errors);
-            }
-        }
-        if (Object.keys(errors).length === 0 && id === undefined) {
-            try {
-                await dispatch(addCar(state)).unwrap();
-                history.push("/allCars");
-            } catch (error) {
-                errors.driverId = error;
-                setErrors(errors);
-            }
-        }*/
     }
-    //console.log(errors)
 
     const validate = (values) => {
         const errors = {};

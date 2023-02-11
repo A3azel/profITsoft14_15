@@ -30,12 +30,12 @@ const getCarSuccess = searchCar => ({searchCar, type: GET_CAR_SUCCESS});
 const addCarSuccess = carID => ({carID, type: ADD_CAR_SUCCESS});
 const updateCarSuccess = () => ({type: UPDATE_CAR_SUCCESS});
 const deleteCarSuccess = () => ({type: DELETE_CAR_SUCCESS});
-const errorGetCarPageCount = (error) => ({error, type: ERROR_GET_CARS_PAGE_COUNT});
-const errorGetCarPage = (error) => ({error, type: ERROR_GET_CARS_PAGE});
-const errorGetCar = (error) => ({error, type: ERROR_GET_CAR});
-const errorAddCar = (error) => ({error, type: ERROR_ADD_CAR});
-const errorUpdateCar = (error) => ({error, type: ERROR_UPDATE_CAR});
-const errorDeleteCar = (error) => ({error, type: ERROR_DELETE_CAR});
+const errorGetCarPageCount = error => ({error, type: ERROR_GET_CARS_PAGE_COUNT});
+const errorGetCarPage = error => ({error, type: ERROR_GET_CARS_PAGE});
+const errorGetCar = error => ({error, type: ERROR_GET_CAR});
+const errorAddCar = error => ({error, type: ERROR_ADD_CAR});
+const errorUpdateCar = error => ({error, type: ERROR_UPDATE_CAR});
+const errorDeleteCar = error => ({error, type: ERROR_DELETE_CAR});
 
 const basicUrl = "http://localhost:8080/api/v1/car";
 
@@ -79,7 +79,6 @@ const addCar = (carBody) => {
         })
             .then((response) => {
                 if (response.status!=201) {
-                    console.log("Here")
                     throw new Error(response.json());
                 }
             })
@@ -89,6 +88,8 @@ const addCar = (carBody) => {
             })
             .catch((error) => {
                 dispatch(errorAddCar(error));
+                console.log("Error")
+                throw new Error(error.message);
             })
     }
 };
@@ -114,7 +115,7 @@ const updateCar = (carBody, id) => {
                 dispatch(fetchCarPage({page: 1}));
             })
             .catch((error) => {
-                dispatch(errorUpdateCar(error));
+                dispatch(errorUpdateCar(error.message));
             })
     }
 };
