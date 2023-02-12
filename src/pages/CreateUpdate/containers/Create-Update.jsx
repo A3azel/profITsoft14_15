@@ -14,6 +14,8 @@ import {customStyles} from "../../customStyles";
 
 function CreateUpdateCar(props) {
 
+    const basicUrl = "http://localhost:8080/api/v1/car";
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -46,7 +48,7 @@ function CreateUpdateCar(props) {
 
 
     useEffect(() => {
-        if(id){
+        if (id) {
             dispatch(fetchCar({id: id}));
         }
     }, []);
@@ -65,39 +67,74 @@ function CreateUpdateCar(props) {
         setErrors(errors);
 
         if (Object.keys(errors).length === 0 && id !== undefined) {
-            dispatch(updateCar(state, Number(id)));
-            history.push("/allCars");
-            return;
+            updateCar(state, Number(id)).then(res => {
+                if (res.ok) {
+                    history.push("/allCars");
+                } else {
+                    errors.driverId = "Driver with id:" + state.driverId + " not found";
+                    setErrors(errors);
+                }
+            })
         }
         if (Object.keys(errors).length === 0 && id === undefined) {
-            dispatch(addCar(state));
-            history.push("/allCars");
+            createCar(state).then(res => {
+                if (res.status == 201) {
+                    history.push("/allCars");
+                } else {
+                    errors.driverId = "Driver with id:" + state.driverId + " not found";
+                    setErrors(errors);
+                }
+            })
         }
+
+
+    }
+
+    const createCar = (Car) => {
+        return fetch(basicUrl + "/create", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Car),
+        })
+    }
+
+    const updateCar = (Car, id) => {
+        return fetch(basicUrl + "/update/" + id, {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Car),
+        })
     }
 
     const validate = (values) => {
         const errors = {};
-        if(values.carName.length<2 || values.carName.length>256){
+        if (values.carName.length < 2 || values.carName.length > 256) {
             errors.carName = "Length must be from 2 to 256 characters";
         }
-        if(values.brand.length<2 || values.brand.length>64){
+        if (values.brand.length < 2 || values.brand.length > 64) {
             errors.brand = "Length must be from 2 to 64 characters";
         }
-        if(values.carPrise=='NaN'){
+        if (values.carPrise == 'NaN') {
             errors.carPrise = "Not valid value";
-        }else {
-            if(Number(values.carPrise)<=0){
+        } else {
+            if (Number(values.carPrise) <= 0) {
                 errors.carPrise = "The price cannot be negative or zero";
             }
         }
-        if(values.releaseDate=='Invalid Date'){
+        if (values.releaseDate == 'Invalid Date') {
             errors.releaseDate = "This field can't be blank";
-        }else{
-            if(new Date(values.releaseDate).getTime()>new Date().getTime()){
+        } else {
+            if (new Date(values.releaseDate).getTime() > new Date().getTime()) {
                 errors.releaseDate = "Not valid date";
             }
         }
-        if(!values.driverId || values.driverId<=0){
+        if (!values.driverId || values.driverId <= 0) {
             errors.driverId = "This field can't be blank or negative or zero";
         }
         return errors;

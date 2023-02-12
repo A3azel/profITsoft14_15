@@ -61,8 +61,8 @@ function AllCars(props) {
         }));
     }, []);
 
-    const handleDelete = (id) => {
-        dispatch(deleteCar(id));
+    const handleDelete = (id, selectedPage) => {
+        dispatch(deleteCar(id, selectedPage));
         setState(prevState => ({
             ...prevState,
         }));
@@ -106,7 +106,7 @@ function AllCars(props) {
                                     <Button variant="contained" sx={{backgroundColor: "blue"}}
                                             onClick={() => history.push("/createUpdate/" + car.id)}>Update</Button>
                                     <Button variant="contained" sx={{backgroundColor: "red"}}
-                                            onClick={() => handleDelete(car.id)}>Delete</Button>
+                                            onClick={() => handleDelete(car.id, page)}>Delete</Button>
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}
