@@ -1,10 +1,13 @@
 import React from 'react';
 import PageContainer from "../components/PageContainer";
 import AllCars from "../pages/AllCars/containers/AllCars";
+import PageAccessValidator from "../components/PageAccessValidator";
 const AllCarsPage = () => (
-    <PageContainer>
-        <AllCars/>
-    </PageContainer>
+    <PageAccessValidator>
+        <PageContainer>
+            <AllCars/>
+        </PageContainer>
+    </PageAccessValidator>
 );
 
 

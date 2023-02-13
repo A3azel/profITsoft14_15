@@ -48,32 +48,6 @@ const Initial = ({
             </Typography>
         )}
       </div>
-
-    /*<div className={classes.container}>
-      {canSeeList && availableItems.map((item, index) => (
-        <Link
-          href={index % 2 === 0
-            ? `https://www.google.com.ua/search?q=${item}&hl=ru`
-            : undefined}
-          to={index % 2 !== 0
-            ? (location => ({
-              ...location,
-              pathname: `/${item}`,
-              search: `${location.search}&newProp=42`,
-            }))
-            : undefined}
-        >
-          <Typography>
-            {item}
-          </Typography>
-        </Link>
-      ))}
-      {!canSeeList && (
-        <Typography>
-          Не могу ничего показать :(
-        </Typography>
-      )}
-    </div>*/
   )
 };
 

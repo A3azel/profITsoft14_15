@@ -61,12 +61,12 @@ function CreateUpdateCar(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         state.carPrise = Number(state.carPrise).toFixed(2);
-        state.releaseDate = new Date(state.releaseDate);
         state.driverId = Number(state.driverId);
         let errors = validate(state);
         setErrors(errors);
 
         if (Object.keys(errors).length === 0 && id !== undefined) {
+            state.releaseDate = new Date(state.releaseDate);
             updateCar(state, Number(id)).then(res => {
                 if (res.ok) {
                     history.push("/allCars");
@@ -77,6 +77,7 @@ function CreateUpdateCar(props) {
             })
         }
         if (Object.keys(errors).length === 0 && id === undefined) {
+            state.releaseDate = new Date(state.releaseDate);
             createCar(state).then(res => {
                 if (res.status == 201) {
                     history.push("/allCars");
@@ -86,8 +87,6 @@ function CreateUpdateCar(props) {
                 }
             })
         }
-
-
     }
 
     const createCar = (Car) => {
@@ -127,7 +126,7 @@ function CreateUpdateCar(props) {
                 errors.carPrise = "The price cannot be negative or zero";
             }
         }
-        if (values.releaseDate == 'Invalid Date') {
+        if (new Date(values.releaseDate) == 'Invalid Date') {
             errors.releaseDate = "This field can't be blank";
         } else {
             if (new Date(values.releaseDate).getTime() > new Date().getTime()) {
